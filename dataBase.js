@@ -11,7 +11,7 @@ const TripController = {
                 name: req.body.name,
                 rating: req.body.rating,
                 review: req.body.review,
-                locattionName: req.body.locattionName,
+                locationName: req.body.locationName,
                 location: req.body.location,
                 reviewDate: req.body.reviewDate,
                 tripDate: req.body.tripDate,
@@ -32,6 +32,7 @@ const TripController = {
     getLocation(req, res, next) {
         Trip.find( {}, {location: 1}).then( (data) => {
             res.locals.Locations = data;
+            return next();
         }).catch( (err) => {
             return next({
                 log: `Error in getLocation middleware: ${err}`,
@@ -42,8 +43,9 @@ const TripController = {
 
 
     getReview(req, res, next) {
-        Trip.find({_id: res.params.id}).then( (data) => {
+        Trip.find({_id: req.params.id}).then( (data) => {
             res.locals.Review = data;
+            return next();
         }).catch( (err) => {
             return next( {
                 log: `Error in getReview middleware: ${err}`,
@@ -54,8 +56,9 @@ const TripController = {
 
 
     deleteReview(req, res, next) {
-        Trip.deleteOne({_id: res.params.id}).then( (data) => {
+        Trip.deleteOne({_id: req.params.id}).then( (data) => {
             res.locals.Review = data.location;
+            return next();
         }).catch( (err) => {
             return next( {
                 log: `Error in deleteReview middleware: ${err}`,
