@@ -20,7 +20,7 @@ const TripController = {
             }
         ).then((data) => {
             res.locals.newReview = data;
-            console.log(data.reviewDate)
+            console.log(data)
             return next();
         }).catch((err) => {
             return next({
