@@ -1,6 +1,6 @@
 // const { ModuleFilenameHelpers } = require('webpack');
 // const { db } = require('../model/schema');
-const Trip = require('../model/schema');
+const Trip = require('../model/userModel');
 
 const TripController = {
 
