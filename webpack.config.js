@@ -1,5 +1,5 @@
 const path = require('path');
-const webpack = require('webpack')
+const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const WebpackDevServer = require('webpack-dev-server');
 
@@ -9,7 +9,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   devServer: {
     host: 'localhost',
@@ -20,9 +20,9 @@ module.exports = {
     inline: true,
     proxy: {
       '/api': {
-        target: 'http://localhost:3000'
-      }
-    }
+        target: 'http://localhost:3000',
+      },
+    },
   },
   module: {
     rules: [
@@ -44,13 +44,11 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: './client/static/index.html'
+      template: './client/static/index.html',
     }),
-    new webpack.HotModuleReplacementPlugin(
-      
-    )
+    new webpack.HotModuleReplacementPlugin(),
   ],
   resolve: {
-    extensions: ['.js', '.jsx']
-  }
-}
+    extensions: ['.js', '.jsx'],
+  },
+};

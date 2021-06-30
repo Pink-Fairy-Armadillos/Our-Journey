@@ -9,13 +9,11 @@ const apiRouter = require('./routes/api');
 
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, '../client/index.html'));
-})
-
-
+});
 
 app.use('/api', apiRouter);
 
-app.use((req, res) => res.sendStatus(404))
+app.use((req, res) => res.sendStatus(404));
 
 app.use((err, req, res, next) => {
   const defaultErr = {
@@ -26,7 +24,7 @@ app.use((err, req, res, next) => {
   const errorObj = Object.assign(defaultErr, err);
   console.log(errorObj.log);
   return res.status(errorObj.status).send(errorObj.message);
-})
+});
 
 app.listen(PORT, () => {
   console.log('Server Listening on port 3000');
