@@ -1,48 +1,29 @@
 const mongoose = require('mongoose');
-const { ModuleFilenameHelpers } = require('webpack');
-
+const pinSchema = require('./pinModel.js');
 const MONGO_URL =
-  'mongodb+srv://armadillos:armadillos@cluster0.da8dl.mongodb.net/armadillos?retryWrites=true&w=majority'; //--username armadillos
+  'mongodb+srv://steven:thisisapassword@cluster0.1t2az.mongodb.net/opin-the-world?retryWrites=true&w=majority';
 
 mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  dbName: 'armadillos',
+  dbName: 'opin-the-world',
 });
 
-const Schema = mongoose.Schema;
-
-const ourJourneySchema = new Schema({
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
   },
-  rating: {
-    type: Number,
-    required: true,
-  },
-  review: {
-    type: String,
-    required: false,
-  },
-  locationName: {
+  avatar: String,
+  username: {
     type: String,
     required: true,
   },
-  location: {
-    longitude: Number,
-    latitude: Number,
+  password: {
+    type: String,
+    required: true,
   },
-  reviewDate: {
-    type: Date,
-    default: Date.now,
-  },
-  tripDate: {
-    day: String,
-    month: String,
-    date: Number,
-    year: Number,
-  },
+  pins: [pinSchema],
 });
 
-module.exports = mongoose.model('trip', ourJourneySchema);
+module.exports = mongoose.model('User', userSchema);
