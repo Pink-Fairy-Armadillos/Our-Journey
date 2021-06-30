@@ -5,7 +5,7 @@ export default
         "elementType": "all",
         "stylers": [
             {
-                "color": "#ff7000"
+                "color": "#87CEEB"
             },
             {
                 "lightness": "69"
@@ -26,7 +26,7 @@ export default
         "elementType": "geometry",
         "stylers": [
             {
-                "color": "#cb8536"
+                "color": "#C0C0C0"
             }
         ]
     },
@@ -35,7 +35,7 @@ export default
         "elementType": "labels",
         "stylers": [
             {
-                "color": "#ffb471"
+                "color": "#FFE4B5"
             },
             {
                 "lightness": "66"
@@ -88,18 +88,18 @@ export default
         "featureType": "landscape",
         "elementType": "all",
         "stylers": [
-            {
-                "lightness": "-8"
-            },
+            // {
+            //     "lightness": "-8"
+            // },
             {
                 "gamma": "0.98"
             },
             {
                 "weight": "2.45"
             },
-            {
-                "saturation": "26"
-            }
+            // {
+            //     "saturation": "26"
+            // },
         ]
     },
     {
@@ -109,9 +109,9 @@ export default
             {
                 "lightness": 30
             },
-            {
-                "saturation": 30
-            }
+            // {
+            //     "saturation": 30
+            // }
         ]
     },
     {
@@ -120,6 +120,9 @@ export default
         "stylers": [
             {
                 "saturation": 20
+            },
+            {
+                "color": "#2E8B57"
             }
         ]
     },
@@ -132,7 +135,8 @@ export default
             },
             {
                 "saturation": -20
-            }
+            },
+
         ]
     },
     {
@@ -144,6 +148,9 @@ export default
             },
             {
                 "saturation": -30
+            },
+            {
+                "color": "#FFFAF0"
             }
         ]
     },
@@ -156,6 +163,9 @@ export default
             },
             {
                 "lightness": 25
+            },
+            {
+                "color": "#B22222"
             }
         ]
     },
@@ -167,7 +177,7 @@ export default
                 "lightness": -20
             },
             {
-                "color": "#ecc080"
+                "color": "#00FFFF"
             }
         ]
     }

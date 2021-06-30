@@ -12,6 +12,7 @@ app.get('/', (req, res) => {
 })
 
 
+
 app.use('/api', apiRouter);
 
 app.use((req, res) => res.sendStatus(404))

@@ -5,24 +5,8 @@ import {
 	Marker,
 	InfoWindow,
 } from '@react-google-maps/api';
-// import { formatRelative } from 'data-fns';
-
-// import usePlacesAutocomplete, {
-// 	getGeocode,
-// 	getLatLgn,
-// } from "use-places-autocomplete";
-// import{
-// 	Combobox,
-// 	ComboboxInput,
-// 	ComboboxPopover,
-// 	ComboboxList,
-// 	ComboboxOption,
-// } from "@reach/combobox";
 import '@reach/combobox/styles.css';
-
 import mapStyles from './mapStyles';
-import react from 'react';
-import { set } from 'mongoose';
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -41,7 +25,7 @@ const options = {
 	zoomControl: true,
 };
 
-export default function App() {
+export default function Map() {
 	const { isLoaded, loadError } = useLoadScript({
 		googleMapsApiKey: 'AIzaSyDGbK9d6uevtoiG6D0Hskjxz2AS838JoTY',
 		libraries,

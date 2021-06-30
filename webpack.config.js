@@ -1,5 +1,7 @@
 const path = require('path');
-const HtmlWebPackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const WebpackDevServer = require('webpack-dev-server');
 
 module.exports = {
   entry: './client/index.js',
@@ -11,7 +13,7 @@ module.exports = {
   },
   devServer: {
     host: 'localhost',
-    contentBase: path.resolve(__dirname, 'dist'),
+    contentBase: path.resolve(__dirname, 'static'),
     hot: true,
     port: 8080,
     publicPath: '/',
@@ -42,8 +44,11 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: './client/index.html'
-    })
+      template: './client/static/index.html'
+    }),
+    new webpack.HotModuleReplacementPlugin(
+      
+    )
   ],
   resolve: {
     extensions: ['.js', '.jsx']
