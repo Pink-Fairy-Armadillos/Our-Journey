@@ -1,6 +1,6 @@
 const express = require('express')
 
-const mapController = require('../controllers/dataBase');
+const mapController = require('../controllers/tripController');
 
 const router = express.Router();
 

@@ -1,6 +1,6 @@
 // const { ModuleFilenameHelpers } = require('webpack');
 // const { db } = require('../model/schema');
-const Trip = require('../model/schema');
+const Trip = require('../model/userModel');
 
 const TripController = {
 
@@ -20,7 +20,7 @@ const TripController = {
             }
         ).then((data) => {
             res.locals.newReview = data;
-            console.log(data.reviewDate)
+            console.log(data)
             return next();
         }).catch((err) => {
             return next({
