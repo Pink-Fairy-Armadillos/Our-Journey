@@ -1,34 +1,40 @@
-//import router
-import React, { useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  StaticRouter,
-} from 'react-router-dom';
-//import map
+import React, { useState, useEffect } from 'react';
+
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Map from './Map';
-//import login
 import Login from './Login';
 import Signup from './Signup';
-// import React, { useState } from 'react';
 
-const App = () => {
-  const [username, setUserName] = useState();
-  const [fetchData, setFetchData] = useState(null);
+const App = ({ history }) => {
+  const [fetchedData, setFetchedData] = useState(null);
 
-  // const [token, setToken] = useState();
+  const appEntry = async (endpoint, userInput = {}, method = 'POST') => {
+    const fetchedData = await fetch(endpoint, {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userInput),
+    });
+    return fetchedData.json();
+  };
 
-  // if(!token) return <Login setToken={setToken} />
+  useEffect(() => {
+    !fetchedData && console.error('fetch error: display something to the user')
+  }, [fetchedData])
 
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          <Login setFetchData={setFetchData} />
+          <Signup appEntry={appEntry} setFetchedData={setFetchedData} />
         </Route>
-        <Route path="/Map" component={Map} />
-        <Route path="/Signup" component={Signup} />
+        <Route exact path="/login">
+          <Login appEntry={appEntry} setFetchedData={setFetchedData} />
+        </Route>
+        <Route path="/map">
+          <Map userData={fetchedData} />
+        </Route>
       </Switch>
     </Router>
   );
