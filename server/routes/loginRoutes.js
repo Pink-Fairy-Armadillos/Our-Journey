@@ -5,8 +5,8 @@ const userController = require('../controllers/userController');
 const loginRouter = express.Router();
 
 loginRouter.post('/', userController.getUser, (req, res) => {
-    res.status(200).send(res.locals.person)
-  })
+  console.log(res.locals.person);
+  res.status(200).json(res.locals.person);
+});
 
-  
 module.exports = loginRouter;
