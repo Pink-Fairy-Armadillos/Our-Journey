@@ -19,7 +19,7 @@ module.exports = {
     publicPath: '/',
     inline: true,
     proxy: {
-      '/api': {
+      '/': {
         target: 'http://localhost:3000',
       },
     },
