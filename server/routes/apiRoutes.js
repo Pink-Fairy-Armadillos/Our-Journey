@@ -1,13 +1,23 @@
 const express = require('express');
 
-const tripController = require('../controllers/tripController');
+const pinController = require('../controllers/pinController');
+const avatarController = require('../controllers/avatarController');
 
 const router = express.Router();
 
-router.post('/', tripController.addTrip, (req, res) => {
-  return res.status(200).json(res.locals.newReview);
+router.post('/pin', pinController.updatePins, (req, res) => {
+  return res.status(200).json(res.locals.newPins);
 });
 
+router.post('/message', pinController.message, (req, res) => {
+  //pinController.message not complete
+  return res.statusMessage(200).json(res.locals.message)
+});
+
+router.post('/avatar', avatarController.setAvatar, (req, res) => {
+  //avatarController not complete
+  return res.status(200).json(res.locals.avatar)
+});
 
 //get all of users pins from the database
 // router.get('/pins', tripController.getPins, (req, res) => {

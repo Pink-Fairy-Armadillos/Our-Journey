@@ -10,13 +10,13 @@ const PORT = 3000;
 //   res.send({
 //     token: 'edd'
 //   })
-// }) 
+// })
 
 app.use(express.json()); //testing
 
 const apiRouter = require('./routes/apiRoutes');
-const loginRouter = require('./routes/loginRoutes')
-const signupRouter = require('./routes/signupRoutes')
+const loginRouter = require('./routes/loginRoutes');
+const signupRouter = require('./routes/signupRoutes');
 
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, '../client/index.html'));

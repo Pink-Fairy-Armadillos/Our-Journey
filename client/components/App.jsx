@@ -1,5 +1,5 @@
 //import router
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -13,21 +13,19 @@ import Login from './Login';
 import Signup from './Signup';
 // import React, { useState } from 'react';
 
-
 const App = () => {
-    
   const [username, setUserName] = useState();
   const [fetchData, setFetchData] = useState(null);
 
-    // const [token, setToken] = useState();
-    
-    // if(!token) return <Login setToken={setToken} />
+  // const [token, setToken] = useState();
+
+  // if(!token) return <Login setToken={setToken} />
 
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          <Login setFetchData={setFetchData}/>
+          <Login setFetchData={setFetchData} />
         </Route>
         <Route path="/Map" component={Map} />
         <Route path="/Signup" component={Signup} />

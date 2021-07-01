@@ -1,15 +1,18 @@
 const mongoose = require('mongoose');
 
-const pinSchema = new mongoose.Schema({
-  lat: {
-    type: Number,
-    required: true,
+const pinSchema = new mongoose.Schema(
+  {
+    lat: {
+      type: Number,
+      required: true,
+    },
+    lon: {
+      type: Number,
+      required: true,
+    },
+    message: String,
   },
-  lon: {
-    type: Number,
-    required: true,
-  },
-  message: String,
-}, {timestamp: true});
+  { timestamp: true }
+);
 
 module.exports = pinSchema;
