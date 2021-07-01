@@ -2,6 +2,15 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = 3000;
+// const cors = require('cors');
+
+// app.use(cors());
+
+// app.use('/Login', (req, res) => {
+//   res.send({
+//     token: 'edd'
+//   })
+// }) 
 
 app.use(express.json()); //testing
 
