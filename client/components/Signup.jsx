@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { withRouter } from "react-router";
 import { Link } from 'react-router-dom';
 
-const Signup = ({ appEntry, setFetchedData }) => {
+const Signup = ({ appEntry, setFetchedData, history }) => {
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -47,4 +48,4 @@ const Signup = ({ appEntry, setFetchedData }) => {
   );
 };
 
-export default Signup;
+export default withRouter(Signup);
