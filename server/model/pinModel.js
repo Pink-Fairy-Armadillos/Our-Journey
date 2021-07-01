@@ -10,8 +10,6 @@ const pinSchema = new mongoose.Schema({
     required: true,
   },
   message: String,
-  timestamps: true,
+}, {timestamp: true});
 
-});
-
-module.exports = pinSchema
+module.exports = pinSchema;

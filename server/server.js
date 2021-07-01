@@ -14,13 +14,19 @@ const PORT = 3000;
 
 app.use(express.json()); //testing
 
-const apiRouter = require('./routes/api');
+const apiRouter = require('./routes/apiRoutes');
+const loginRouter = require('./routes/loginRoutes')
+const signupRouter = require('./routes/signupRoutes')
 
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, '../client/index.html'));
 });
 
 app.use('/api', apiRouter);
+
+app.use('/login', loginRouter);
+
+app.use('/signup', signupRouter);
 
 app.use((req, res) => res.sendStatus(404));
 
@@ -32,7 +38,7 @@ app.use((err, req, res, next) => {
   };
   const errorObj = Object.assign(defaultErr, err);
   console.log(errorObj.log);
-  return res.status(errorObj.status).send(errorObj.message);
+  return res.status(errorObj.status).send(errorObj);
 });
 
 app.listen(PORT, () => {
