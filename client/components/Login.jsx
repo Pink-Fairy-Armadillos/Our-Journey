@@ -1,73 +1,45 @@
 import React, { useState } from 'react';
+import { withRouter } from "react-router";
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
-// async function loginUser(info) {
+const Login = ({ appEntry, setFetchedData, history }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-//   return fetch('/login', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(info)
-//   }).then( data => data.json())
 
-// }
-
-const Login = (props) => {
-  async function loginUser(info) {
-    return fetch('/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(info),
-    })
-      .then((data) => data.json())
-      .then((data) => setFetchData(data));
-  }
-
-  const setFetchData = props.setFetchData;
-  const [username, setUserName] = useState();
-  const [password, setPassword] = useState();
-
-  const handlePassword = async (e) => {
-    e.preventDefault();
-    const token = await loginUser({
-      username,
-      password,
-    });
-    setToken(token);
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    const user = await appEntry('/login', { username, password })
+    setFetchedData(user)
+    history.push('/map')
   };
 
   return (
     <div>
-      <form onSubmit={handlePassword}>
+      <form onSubmit={handleFormSubmit}>
         <label>
           <p>User Name</p>
-          <input type="text" onChange={(e) => setUserName(e.target.value)} />
+          <input
+            type="text"
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
+          />
         </label>
         <label>
           <p>Password</p>
           <input
             type="password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
         <button type="submit">Login</button>
       </form>
-      <Link to={'/Map'}>
-        <button>go to map</button>
-      </Link>
-      <Link to={'/Signup'}>
-        <button>Sign Up</button>
+      <Link to='/' >
+        Don't have an account?
       </Link>
     </div>
   );
 };
 
-// Login.propTypes = {
-//   setToken: PropTypes.func.isRequired
-// }
-
-export default Login;
+export default withRouter(Login);
