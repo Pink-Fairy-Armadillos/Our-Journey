@@ -1,25 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Signup = () => {
+const Signup = ({ appEntry, setFetchedData }) => {
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    const user = await appEntry('/signup', { name, username, password });
+    setFetchedData(user)
+    history.push('/map')
+  };
+
   return (
     <div>
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <label>
-          <p>Create User Name</p>
-          <input type="text" />
+          <p>Name</p>
         </label>
+        <input
+          type="text"
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+        />
         <label>
-          <p>Create Password</p>
-          <input type="password" />
+          <p>User Name</p>
         </label>
-      </form>
-      <Link to={'/Map'}>
+        <input
+          type="text"
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
+        />
+        <label>
+          <p>Password</p>
+        </label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <button type="submit">Sign Up</button>
-      </Link>
-      <Link to={'/'}>
-        <button type="submit">Login</button>
-      </Link>
+      </form>
+      <Link to="/login">Already have an account?</Link>
     </div>
   );
 };
