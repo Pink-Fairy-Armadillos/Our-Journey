@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   GoogleMap,
   useLoadScript,
@@ -8,12 +8,24 @@ import {
 import '@reach/combobox/styles.css';
 import mapStyles from './mapStyles';
 
+// Returns a object with the browser geolocation coordinates as a promise.
+const getPosition = async () => {
+  try {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const libraries = ['places'];
 const mapContainerStyle = {
   width: '90vw',
   height: '100vh',
 };
 
+// Sample data from previous project.
 const center = {
   lat: 39.321,
   lng: -111.950684,
@@ -30,14 +42,20 @@ export default function Map() {
     googleMapsApiKey: 'AIzaSyDGbK9d6uevtoiG6D0Hskjxz2AS838JoTY',
     libraries,
   });
-  const [markers, setMarkers] = React.useState([]);
-  const [selected, setSelected] = React.useState(null);
+  const [markers, setMarkers] = useState([]);
+  const [selected, setSelected] = useState(null);
+  const [initialCoords, setInitialCoords] = useState(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
+    getPosition().then(({ coords }) =>
+      setInitialCoords({
+        lat: coords.latitude,
+        lng: coords.longitude,
+      })
+    );
     fetch('/api')
       .then((res) => res.json())
       .then((data) => {
-        //console.log([...markers,...data.location])
         setMarkers([...markers, ...data.location]);
       });
   }, []);
@@ -78,8 +96,8 @@ export default function Map() {
       <h1>Our Journey</h1>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={8}
-        center={center}
+        zoom={initialCoords ? 9 : 3}
+        center={initialCoords ? initialCoords : center}
         options={options}
         onClick={onMapClick}
         onLoad={onMapLoad}
@@ -88,12 +106,6 @@ export default function Map() {
           <Marker
             key={marker.reviewDate}
             position={{ lat: marker.lat, lng: marker.lng }}
-            // icon={{
-            // 	url: "./arma.jpeg",
-            // 	scaledSize: new window.google.maps.Size(30,30),
-            // 	origin: new window.google.maps.Point(0,0),
-            // 	anchor: new window.google.maps.Point(15,15),
-            // }}
             onClick={() => {
               setSelected(marker);
             }}
@@ -109,7 +121,6 @@ export default function Map() {
           >
             <div>
               <h2>{selected.name}</h2>
-              {/* // <p>Spotted {formatRelative(selected.time, new Date())}</p> */}
             </div>
           </InfoWindow>
         ) : null}
